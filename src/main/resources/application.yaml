@@ -1,0 +1,11 @@
+server:
+  port: 3001
+spring:
+  application:
+    name: ideasy_server
+  # \u6570\u636E\u5E93\u8FDE\u63A5
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.2.100:3306/ideasy?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: Libin704098.00
