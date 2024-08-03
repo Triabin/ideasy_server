@@ -1,11 +1,26 @@
 server:
   port: 3001
+
+# 开启日志
+logging:
+  level:
+    com:
+      triabin:
+        ideasy_server: debug
 spring:
   application:
     name: ideasy_server
-  # \u6570\u636E\u5E93\u8FDE\u63A5
+  # 数据源
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.2.100:3306/ideasy?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: Libin704098.00
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.2.100:3306/ideasy?useUnicode=true&characterEncoding=UTF-8?useSSL=false
+      username: root
+      password: Libin704098.00
+
+# MyBatis
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml # classpath: ==> resources/
+  type-aliases-package: com.triable.ideasy_server.pojo # 包别名
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰命名
