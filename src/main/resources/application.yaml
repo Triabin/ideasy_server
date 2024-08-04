@@ -1,12 +1,6 @@
 server:
   port: 3001
 
-# 开启日志
-logging:
-  level:
-    com:
-      triabin:
-        ideasy_server: debug
 spring:
   application:
     name: ideasy_server
@@ -17,6 +11,20 @@ spring:
       url: jdbc:mysql://192.168.2.100:3306/ideasy?useUnicode=true&characterEncoding=UTF-8?useSSL=false
       username: root
       password: Libin704098.00
+
+# 开启日志
+logging:
+  config: classpath:log4j2.xml
+  level:
+    root: INFO
+    javax.activation: info
+    org.apache.catalina: INFO
+    org.apache.commons.beanutils.converters: INFO
+    org.apache.coyote.http11.Http11Processor: INFO
+    org.apache.http: INFO
+    org.apache.tomcat: INFO
+    org.springframework: INFO
+    com.chinamobile.cmss.bdpaas.resource.monitor: DEBUG
 
 # MyBatis
 mybatis:
