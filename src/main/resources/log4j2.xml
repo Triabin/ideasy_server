@@ -17,6 +17,7 @@
         <Console name="consoleAppender" target="SYSTEM_OUT">
             <!-- 2.1.1 配置日志输出格式和颜色 -->
             <PatternLayout
+                    charset="UTF-8"
                     pattern="%style{%d{ISO8601}}{bright,green} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C{}}{bright,yellow}: %msg%n%style{%throwable}{red}"
                     disableAnsi="false"
                     noConsoleNoAnsi="false"/>
@@ -27,7 +28,7 @@
                      fileName="${LOG_HOME}/all.log"
                      filePattern="${LOG_HOME}/$${date:yyyy-MM}/all-%d{yyyy-MM-dd}-%i.log.gz">
             <!--设置日志格式-->
-            <PatternLayout>
+            <PatternLayout charset="UTF-8">
                 <pattern>%d %p %C{} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
@@ -51,7 +52,7 @@
                 <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <!--设置日志格式-->
-            <PatternLayout>
+            <PatternLayout charset="UTF-8">
                 <pattern>%d %p %C{} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
@@ -75,7 +76,7 @@
                 <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <!--设置日志格式-->
-            <PatternLayout>
+            <PatternLayout charset="UTF-8">
                 <pattern>%d %p %C{} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
@@ -99,7 +100,7 @@
                 <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <!--设置日志格式-->
-            <PatternLayout>
+            <PatternLayout charset="UTF-8">
                 <pattern>%d %p %C{} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
@@ -119,7 +120,7 @@
                      fileName="${LOG_HOME}/error.log"
                      filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
             <!--设置日志格式-->
-            <PatternLayout>
+            <PatternLayout charset="UTF-8">
                 <pattern>%d %p %C{} [%t] %m%n</pattern>
             </PatternLayout>
             <Policies>
