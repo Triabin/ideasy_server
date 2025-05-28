@@ -1,10 +1,13 @@
 package com.triabin.ideasy_server.bean.user;
 
+import lombok.Getter;
+
 /**
  * 类描述：用户表查询参数
  * @author Triabin
  * @date 2024-07-14 10:36:45
  */
+@Getter
 public class UserDto {
     /**
      * 性别，0：男，1：女 {@link com.triabin.ideasy_server.common.enums.Gender}
@@ -21,26 +24,14 @@ public class UserDto {
      */
     private String userName;
 
-    public Integer getGender() {
-        return gender;
-    }
-
     public UserDto setGender(Integer gender) {
         this.gender = gender;
         return this;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
     public UserDto setAge(Integer age) {
         this.age = age;
         return this;
-    }
-
-    public String getUserName() {
-        return userName;
     }
 
     public UserDto setUserName(String userName) {

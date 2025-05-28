@@ -4,12 +4,12 @@ import com.triabin.ideasy_server.bean.user.UserDto;
 import com.triabin.ideasy_server.common.dto.Response;
 import com.triabin.ideasy_server.pojo.User;
 import com.triabin.ideasy_server.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,10 +17,11 @@ import java.util.List;
  * @author Triabin
  * @date 2024-07-12 16:48:54
  */
-@RestController("/user")
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
     private IUserService userService;
 
     @GetMapping("/queryUsers")

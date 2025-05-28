@@ -4,11 +4,10 @@ import com.triabin.ideasy_server.bean.user.UserDto;
 import com.triabin.ideasy_server.mapper.UserMapper;
 import com.triabin.ideasy_server.pojo.User;
 import com.triabin.ideasy_server.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,10 +15,10 @@ import java.util.List;
  * @author Triabin
  * @date 2024-07-12 17:26:36
  */
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
     private UserMapper userMapper;
 
     @Override
