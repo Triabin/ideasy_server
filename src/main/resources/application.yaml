@@ -8,7 +8,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.2.100:3306/ideasy?useUnicode=true&characterEncoding=UTF-8?useSSL=false
+      url: jdbc:mysql://192.168.2.100:3306/ideasy?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
       username: root
       password: Libin704098.00
 
@@ -17,7 +17,7 @@ logging:
   config: classpath:log4j2.xml
   level:
     root: INFO
-    javax.activation: info
+    javax.activation: INFO
     org.apache.catalina: INFO
     org.apache.commons.beanutils.converters: INFO
     org.apache.coyote.http11.Http11Processor: INFO
@@ -32,3 +32,4 @@ mybatis:
   type-aliases-package: com.triable.ideasy_server.pojo # 包别名
   configuration:
     map-underscore-to-camel-case: true # 开启驼峰命名
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl # 控制台输出日志

@@ -16,10 +16,10 @@ import java.util.List;
  * @date 2024-07-12 17:26:36
  */
 @RequiredArgsConstructor
-@Service
+@Service("userService")
 public class UserServiceImpl implements IUserService {
 
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public List<User> selectUsers(UserDto param) throws IOException {

@@ -5,6 +5,8 @@ import com.triabin.ideasy_server.common.dto.Response;
 import com.triabin.ideasy_server.pojo.User;
 import com.triabin.ideasy_server.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +24,17 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private IUserService userService;
+    private static final Logger logger = LogManager.getLogger(UserController.class);
+
+    private final IUserService userService;
 
     @GetMapping("/queryUsers")
     public Response<List<User>> queryUsers(@RequestBody UserDto params) {
         try {
             return Response.success(userService.selectUsers(params));
         } catch (Exception e) {
+            logger.error("查询用户信息异常", e);
             return Response.error();
         }
     }
-
 }

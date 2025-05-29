@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public class UserDto {
     /**
-     * 性别，0：男，1：女 {@link com.triabin.ideasy_server.common.enums.Gender}
+     * 性别，MALE：男，FEMALE：女 {@link com.triabin.ideasy_server.common.enums.Gender}
      */
-    private Integer gender;
+    private String gender;
 
     /**
      * 年龄
@@ -22,9 +22,9 @@ public class UserDto {
     /**
      * 用户名
      */
-    private String userName;
+    private String username;
 
-    public UserDto setGender(Integer gender) {
+    public UserDto setGender(String gender) {
         this.gender = gender;
         return this;
     }
@@ -34,8 +34,8 @@ public class UserDto {
         return this;
     }
 
-    public UserDto setUserName(String userName) {
-        this.userName = userName;
+    public UserDto setUsername(String username) {
+        this.username = username;
         return this;
     }
 }

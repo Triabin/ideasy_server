@@ -1,31 +1,29 @@
 package com.triabin.ideasy_server.common.enums;
 
+import lombok.Getter;
+
 /**
  * 类描述：性别枚举类
  * @author Triabin
  * @date 2024-07-12 16:55:21
  */
+@Getter
 public enum Gender {
 
-    MALE(0, "男"),
+    MALE(0, "MALE", "男"),
 
-    FEMALE(1, "女");
+    FEMALE(1, "FEMALE", "女");
 
     private final Integer code;
 
+    private final String value;
+
     private final String desc;
 
-    Gender(Integer code, String desc) {
+    Gender(Integer code, String value, String desc) {
         this.code = code;
+        this.value = value;
         this.desc = desc;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getDesc() {
-        return desc;
     }
 
     public static Gender getInstance(Integer code) {

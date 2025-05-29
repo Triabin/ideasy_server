@@ -152,7 +152,9 @@
         <!-- druid数据源日志 -->
         <Logger name="druid.sql.Statement" level="warn"/>
         <!-- mybatis日志 -->
-        <Logger name="com.mybatis" level="warn"/>
+        <Logger name="com.triabin.ideasy_server.mapper" level="DEBUG" additivity="false">
+            <AppenderRef ref="consoleAppender"/>
+        </Logger>
         <Logger name="org.hibernate" level="warn"/>
         <Logger name="com.zaxxer.hikari" level="info"/>
         <Logger name="org.quartz" level="info"/>
