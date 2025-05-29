@@ -5,10 +5,35 @@
     <select id="selectUsers"
             parameterType="com.triabin.ideasy_server.bean.user.UserDto"
             resultType="com.triabin.ideasy_server.pojo.User">
-        SELECT *
-        FROM `ideasy_user`
-        WHERE `username` LIKE #{username}
-          AND `gender` = #{gender}
-          AND `age` = #{age};
+        SELECT * FROM `ideasy_user`
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="genders != null and genders.size() > 0">
+                AND
+                <foreach collection="genders" item="gender" open="(" separator="OR" close=")">
+                    gender=#{gender.value}
+                </foreach>
+            </if>
+            <if test="youngerOrEqThan != null">
+                AND age &lt;= #{youngerOrEqThan}
+            </if>
+            <if test="olderOrEqThan != null">
+                AND age >= #{olderOrEqThan}
+            </if>
+            <if test="createdAfterOrEq != null">
+                AND created_at >= #{createdAfterOrEq}
+            </if>
+            <if test="createdBeforeOrEq != null">
+                AND created_at &lt;= #{createdBeforeOrEq}
+            </if>
+            <if test="updatedAfterOrEq != null">
+                AND updated_at >= #{updatedAfterOrEq}
+            </if>
+            <if test="updatedBeforeOrEq != null">
+                AND updated_at &lt;= #{updatedBeforeOrEq}
+            </if>
+        </where>
     </select>
 </mapper>
