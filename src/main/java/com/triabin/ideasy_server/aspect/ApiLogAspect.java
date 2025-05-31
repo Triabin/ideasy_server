@@ -3,6 +3,7 @@ package com.triabin.ideasy_server.aspect;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONException;
 import com.alibaba.fastjson2.JSONWriter;
+import com.triabin.ideasy_server.common.UUIDUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -12,11 +13,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -41,7 +40,7 @@ public class ApiLogAspect {
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        String traceId = UUID.randomUUID().toString().replace("-", "");
+        String traceId = UUIDUtils.generate();
         long startTime = System.currentTimeMillis();
 
         // 1. 请求参数记录（智能截断）
@@ -59,23 +58,16 @@ public class ApiLogAspect {
         }
 
         // 2. 方法执行与耗时统计
-        Object result;
-        try {
-            result = joinPoint.proceed();
-        } finally {
-            long costTime = System.currentTimeMillis() - startTime;
-            MDC.put("costTime", String.valueOf(costTime));
-        }
+        Object result= joinPoint.proceed();
+        long costTime = System.currentTimeMillis() - startTime;
 
         // 3. 响应结果处理（异步记录）
         CompletableFuture.runAsync(() -> {
             try {
                 String response = JSON.toJSONString(result, JSONWriter.Feature.PrettyFormat, JSONWriter.Feature.WriteNulls);
-                logger.info("【响应】 traceId={} | cost={}ms | result={}", traceId, MDC.get("costTime"), response);
+                logger.info("【响应】traceId={} | cost={}ms | result={}", traceId, costTime, response);
             } catch (Exception e) {
                 logger.error("响应结果序列化异常", e);
-            } finally {
-                MDC.remove("costTime");
             }
         });
 
