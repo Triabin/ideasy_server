@@ -4,13 +4,34 @@ server:
 spring:
   application:
     name: ideasy_server
-  # 数据源
+  # 数据库
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.2.100:3306/ideasy?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Libin704098.00
+    # 连接池
     druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.2.100:3306/ideasy?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-      username: root
-      password: Libin704098.00
+      initial-size: 5         # 初始连接数
+      min-idle: 5             # 最小空闲连接
+      max-active: 20          # 最大连接数
+      max-wait: 60000         # 获取连接超时时间（毫秒）
+      test-while-idle: true   # 空闲时检测连接有效性
+      validation-query: SELECT 1  # 连接检测 SQL
+      stat-view-servlet:
+        # 是否启用StatViewServlet默认值true
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重置数据
+        reset-enable: false
+        # 需要账号密码才能访问控制台，默认为root
+        login-username: druid
+        login-password: druid
+        # IP白名单
+        allow: 127.0.0.1
+        # IP黑名单（共同存在时，deny优先于allow）
+        deny:
 
 # 开启日志
 logging:

@@ -34,7 +34,7 @@ public class UserController {
             return Response.success(userService.selectUsers(params));
         } catch (Exception e) {
             logger.error("查询用户信息异常", e);
-            return Response.error();
+            return Response.error("查询用户信息异常");
         }
     }
 }
