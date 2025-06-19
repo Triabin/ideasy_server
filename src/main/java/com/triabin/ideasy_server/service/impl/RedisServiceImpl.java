@@ -3,6 +3,7 @@ package com.triabin.ideasy_server.service.impl;
 import com.triabin.ideasy_server.service.IRedisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -197,5 +198,15 @@ public class RedisServiceImpl implements IRedisService {
     @Override
     public Long lRemove(String key, long count, Object value) {
         return redisTemplate.opsForList().remove(key, count, value);
+    }
+
+    @Override
+    public Boolean setBit(String key, long index, boolean value) {
+        return redisTemplate.opsForValue().setBit(key, index, value);
+    }
+
+    @Override
+    public <T> List<Object> pipeline(SessionCallback<T> callback) {
+        return redisTemplate.executePipelined(callback);
     }
 }

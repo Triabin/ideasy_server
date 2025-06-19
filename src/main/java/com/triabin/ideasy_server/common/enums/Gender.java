@@ -29,7 +29,9 @@ public enum Gender {
 
     public static Gender getInstance(Integer code) {
         for (Gender gender : Gender.values()) {
-            if (gender.getCode().equals(code)) return gender;
+            if (gender.getCode().equals(code)) {
+                return gender;
+            }
         }
         return null;
     }
@@ -37,7 +39,9 @@ public enum Gender {
     @JSONCreator(parameterNames = "value")
     public static Gender getInstance(String value) {
         for (Gender gender : Gender.values()) {
-            if (gender.getValue().equals(value)) return gender;
+            if (gender.getValue().equals(value)) {
+                return gender;
+            }
         }
         return null;
     }

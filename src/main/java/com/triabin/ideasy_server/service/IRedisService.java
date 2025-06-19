@@ -1,5 +1,7 @@
 package com.triabin.ideasy_server.service;
 
+import org.springframework.data.redis.core.SessionCallback;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -182,4 +184,11 @@ public interface IRedisService {
      * 从List结构中移除属性
      */
     Long lRemove(String key, long count, Object value);
+
+    /**
+     * 设置位图
+     */
+    Boolean setBit(String key, long index, boolean value);
+
+    <T> List<Object> pipeline(SessionCallback<T> callback);
 }
