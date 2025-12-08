@@ -34,9 +34,8 @@ public class ApiLogAspect {
 
     @Pointcut("@within(org.springframework.web.bind.annotation.RestController)" +
             "&& within(com.triabin.ideasy_server.controller..*)" +
-            "&& execution(com.triabin.ideasy_server.controller.FileServer)")
-    public void logPointCut() {
-    }
+            "&& execution(* com.triabin.ideasy_server.controller.FileServer.*(..))")
+    public void logPointCut() {}
 
     @Around("logPointCut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -79,6 +78,11 @@ public class ApiLogAspect {
     @AfterThrowing(pointcut = "logPointCut()", throwing = "ex")
     public void logException(JoinPoint joinPoint, Throwable ex) {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-        logger.error("【异常】 method={} | errorType={} | message={} | stack={}", method.getName(), ex.getClass().getSimpleName(), ex.getMessage(), ex.getStackTrace());
+        logger.error("【异常】 method={} | errorType={} | message={} | stack={}",
+                method.getName(),
+                ex.getClass().getSimpleName(),
+                ex.getMessage(),
+                ex.getStackTrace()
+        );
     }
 }
