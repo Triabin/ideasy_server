@@ -2,8 +2,10 @@ package com.triabin.ideasy_server.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tika.Tika;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +30,18 @@ public class FileServer {
 
     @GetMapping("/ebook")
     public void ebook(HttpServletResponse response) {
-        File file = new File("D:\\Users\\PublicFiles\\电子书\\玄幻小说\\凡人修仙传合集(忘语).epub");
+        File file = new File("/Users/dawnlee/Pictures/电脑壁纸/snow_bg.jpg");
         try (InputStream is = new FileInputStream(file)) {
             String fileName = file.getName();
+            String fileType = new Tika().detect(file);
+            if (StringUtils.isBlank(fileType)) {
+                fileType = "application/octet-stream";
+            }
             byte[] bytes = new byte[4096];
             int readLen;
             response.reset();
-            response.setContentType("application/octet-stream;charset=UTF-8");
-            response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes("GB2312"), StandardCharsets.ISO_8859_1));
+            response.setContentType(fileType + ";charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8));
             response.addHeader("Cache-Control", "no-cache");
             // 配置允许跨域
             response.setHeader("Access-Control-Allow-Origin", "*");

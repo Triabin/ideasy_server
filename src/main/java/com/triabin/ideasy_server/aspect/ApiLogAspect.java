@@ -34,7 +34,7 @@ public class ApiLogAspect {
 
     @Pointcut("@within(org.springframework.web.bind.annotation.RestController)" +
             "&& within(com.triabin.ideasy_server.controller..*)" +
-            "&& execution(* com.triabin.ideasy_server.controller.FileServer.*(..))")
+            "&& !execution(* com.triabin.ideasy_server.controller.FileServer.*(..))")
     public void logPointCut() {}
 
     @Around("logPointCut()")
