@@ -36,4 +36,8 @@
             </if>
         </where>
     </select>
+
+    <select id="getUserById" parameterType="int" resultType="com.triabin.ideasy_server.pojo.User">
+        SELECT * FROM `ideasy_user` WHERE id = #{id}
+    </select>
 </mapper>
