@@ -108,6 +108,7 @@ public class RedisBloomFilter {
             SessionCallback<Boolean> callback = new SessionCallback<>() {
                 @Override
                 public <K, V> Boolean execute(RedisOperations<K, V> operations) throws DataAccessException {
+                    @SuppressWarnings("unchecked")
                     ValueOperations<String, String> valueOperations = (ValueOperations<String, String>) operations.opsForValue();
                     for (long index : getBitIndices(element)) {
                         valueOperations.setBit(actualKey, index, true);
@@ -140,6 +141,7 @@ public class RedisBloomFilter {
             SessionCallback<Boolean> callback = new SessionCallback<>() {
                 @Override
                 public <K, V> Boolean execute(RedisOperations<K, V> operations) throws DataAccessException {
+                    @SuppressWarnings("unchecked")
                     ValueOperations<String, String> valueOperations = (ValueOperations<String, String>) operations.opsForValue();
                     for (long index : getBitIndices(element)) {
                         valueOperations.getBit(actualKey, index);
