@@ -2,16 +2,20 @@ package com.triabin.ideasy_server.common;
 
 import org.apache.tika.Tika;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
+import java.util.function.Consumer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -280,6 +284,30 @@ public class MyFileUtils {
                 sb.append(String.format("%02x", b));
             }
             return sb.toString();
+        }
+    }
+
+    /**
+     * 方法描述：通过文件路径字符串获取文件名
+     *
+     * @param path 文件路径
+     * @return {@link String} 文件名
+     * @date 2026-10-05 09:16:05
+     */
+    public static String getFileNameByPath(String path) {
+        if (path == null) return null;
+        int lastSepIndex = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
+        int extStartIndex = path.lastIndexOf(".");
+        extStartIndex = extStartIndex < 0 ? path.length() : extStartIndex;
+        return path.substring(lastSepIndex + 1, extStartIndex);
+    }
+
+    public static void processLines(String path, Charset charset, Consumer<String> processor) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(path, charset))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                processor.accept(line);
+            }
         }
     }
 }
