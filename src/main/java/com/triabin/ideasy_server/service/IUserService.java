@@ -19,7 +19,7 @@ public interface IUserService {
      * 方法描述：条件查询用户
      * @param param 查询参数
      * @return {@link List}
-     * @throws IOException
+     * @throws IOException 数据库连接异常
      * @date 2024-07-14 10:44:53
      */
     List<User> selectUsers(UserDto param) throws IOException;

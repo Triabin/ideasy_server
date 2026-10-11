@@ -1,10 +1,15 @@
 package com.triabin.ideasy_server.common.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 类描述：前后端交互响应类
  * @author Triabin
  * @date 2024-07-14 13:46:20
  */
+@Getter
+@Setter
 public class Response<T> {
 
     /**
@@ -56,26 +61,14 @@ public class Response<T> {
         return new Response<>(500, msg, null);
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
     public Response<T> setCode(Integer code) {
         this.code = code;
         return this;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
     public Response<T> setMsg(String msg) {
         this.msg = msg;
         return this;
-    }
-
-    public T getData() {
-        return data;
     }
 
     public Response<T> setData(T data) {

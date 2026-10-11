@@ -1,8 +1,11 @@
 package com.triabin.ideasy_server.pojo;
 
 import com.triabin.ideasy_server.common.enums.Gender;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,7 +15,12 @@ import java.time.LocalDateTime;
  * @date 2024-07-10 08:47:18
  */
 @Getter
+@Setter
+@EqualsAndHashCode
 public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 8802915689758004674L;
 
     /**
      * 主键ID
@@ -30,7 +38,7 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 性别（0：男，1：女）
+     * 性别（MALE：男，FEMALE：女）
      * {@link Gender#getValue()}
      */
     private String gender;

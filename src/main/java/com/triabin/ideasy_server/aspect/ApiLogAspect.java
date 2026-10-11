@@ -43,25 +43,20 @@ public class ApiLogAspect {
         Method method = signature.getMethod();
         String traceId = UUIDUtils.generate();
         long startTime = System.currentTimeMillis();
-
         // 1. 请求参数记录（智能截断）
         try {
             Object[] args = joinPoint.getArgs();
             String params = JSON.toJSONString(args, JSONWriter.Feature.IgnoreNonFieldGetter, JSONWriter.Feature.WriteBigDecimalAsPlain);
-
             if (params.length() > MAX_PARAM_LENGTH) {
                 params = params.substring(0, MAX_PARAM_LENGTH) + "...【截断】";
             }
-
             logger.info("【请求】 traceId={} | method={} | params={}", traceId, method.getName(), params);
         } catch (JSONException e) {
             logger.warn("【参数序列化异常】 {}", e.getMessage());
         }
-
         // 2. 方法执行与耗时统计
         Object result= joinPoint.proceed();
         long costTime = System.currentTimeMillis() - startTime;
-
         // 3. 响应结果处理（异步记录）
         CompletableFuture.runAsync(() -> {
             try {
@@ -71,7 +66,6 @@ public class ApiLogAspect {
                 logger.error("响应结果序列化异常", e);
             }
         });
-
         return result;
     }
 
