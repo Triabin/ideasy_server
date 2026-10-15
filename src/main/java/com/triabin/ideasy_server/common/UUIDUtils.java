@@ -9,6 +9,7 @@ import java.util.UUID;
  * @date 2025-05-31 15:24:41
  */
 public class UUIDUtils {
+    private UUIDUtils(){}
 
     /**
      * 方法描述：生成UUID

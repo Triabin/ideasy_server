@@ -27,6 +27,7 @@ import java.util.zip.ZipOutputStream;
  * @date 2025-12-11 14:40:53
  */
 public class MyFileUtils {
+    private MyFileUtils() {}
     /**
      * 方法描述：获取文件类型
      *

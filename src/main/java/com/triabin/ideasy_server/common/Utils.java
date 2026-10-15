@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @date 2026-08-27 12:22:14
  */
 public class Utils {
+    private Utils() {}
     /**
      * 方法描述：中文为主的文本字数计数，其中一个英文单词、一个emoji算一个字，忽略标点符号，统计的是真正看过去的文字数
      *

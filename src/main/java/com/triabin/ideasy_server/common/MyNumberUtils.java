@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  * @date 2026-01-14 17:12:35
  */
 public class MyNumberUtils {
+    private MyNumberUtils() {}
 
     /**
      * 方法描述：获取指定正数范围指定长度的随机元素数组
